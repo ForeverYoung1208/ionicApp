@@ -1,0 +1,43 @@
+# Android Studio Troubleshooting for Ionic Capacitor Project
+
+## Issue
+When running `ionic cap open android`, the following error occurs:
+```
+Error: spawn /home/ihor/android-studio/ EACCES
+```
+
+## Attempted Solutions
+1. Updated capacitor.config.ts to include Android Studio path:
+```typescript
+import type { CapacitorConfig } from '@capacitor/cli';
+
+const config: CapacitorConfig = {
+  appId: 'io.ionic.starter',
+  appName: 'ionicApp',
+  webDir: 'dist',
+  android: {
+    androidStudioPath: '/home/ihor/android-studio/bin/studio.sh'
+  }
+};
+
+export default config;
+```
+
+2. Verified Android Studio executable permissions:
+- Android Studio is located at `/home/ihor/android-studio/`
+- The executable is at `/home/ihor/android-studio/bin/studio.sh` with executable permissions
+
+## Next Steps to Try
+1. Try running Android Studio directly to ensure it works: `~/android-studio/bin/studio.sh`
+2. Check if Capacitor needs to be synced after config changes: `ionic cap sync`
+3. Try setting the Android Studio path via environment variable:
+   ```
+   export CAPACITOR_ANDROID_STUDIO_PATH="/home/ihor/android-studio/bin/studio.sh"
+   ionic cap open android
+   ```
+4. Check if there's a global Capacitor config that might be overriding the project config
+5. Consider creating a symbolic link: `sudo ln -s /home/ihor/android-studio/bin/studio.sh /usr/local/bin/studio`
+
+## Current Environment
+- Project location: /home/ihor/study/ionicApp
+- Android Studio location: /home/ihor/android-studio
