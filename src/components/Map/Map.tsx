@@ -54,7 +54,8 @@ const MyMap: React.FC = () => {
         width: '100%', 
         height: '400px', 
         marginBottom: '20px',
-        boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+        boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+        background: 'transparent'
       }}>
         <GoogleMapComponent 
           ref={mapRef}
@@ -64,7 +65,8 @@ const MyMap: React.FC = () => {
             height: '100%',
             border: '1px solid #ddd',
             borderRadius: '8px',
-            overflow: 'hidden'
+            overflow: 'hidden',
+            background: 'transparent'
           }}
         />
       </div>

@@ -38,11 +38,11 @@ setupIonicReact();
 
 const App: React.FC = () => {
   return (
-    <IonApp>
-      <IonReactRouter>
-        <IonSplitPane contentId="main">
+    <IonApp style={{ backgroundColor: 'transparent' }}>
+      <IonReactRouter >
+        <IonSplitPane contentId="main" style={{ backgroundColor: 'transparent' }}>
           <Menu />
-          <IonRouterOutlet id="main">
+          <IonRouterOutlet id="main" style={{ backgroundColor: 'transparent' }}>
             <Route path="/" exact={true}>
               <Redirect to="/folder/Services" />
             </Route>

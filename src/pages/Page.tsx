@@ -8,7 +8,7 @@ const Page: React.FC = () => {
   const { name } = useParams<{ name: string; }>();
 
   return (
-    <IonPage>
+    <IonPage style={{ backgroundColor: 'transparent' }}>
       <IonHeader>
         <IonToolbar>
           <IonButtons slot="start">
@@ -18,7 +18,7 @@ const Page: React.FC = () => {
         </IonToolbar>
       </IonHeader>
 
-      <IonContent fullscreen>
+      <IonContent fullscreen style={{ backgroundColor: 'transparent' }}>
         <IonHeader collapse="condense">
           <IonToolbar>
             <IonTitle size="large">{name}</IonTitle>

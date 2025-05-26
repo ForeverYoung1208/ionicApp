@@ -33,18 +33,16 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths"></meta-data>
         </provider>
+        <!--My custom permissions-->
+        <!--Google Maps API Key-->
+        <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyDkaiDJXshPWCm5YMm8PTVuFUX1CrA3vD4"/>
+
     </application>
 
-    <!-- Permissions -->
-
+    <!--Permissions-->  
     <uses-permission android:name="android.permission.INTERNET" />
-<!--My custom permissions-->
-<!--Google Maps API Key-->
-<meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyDkaiDJXshPWCm5YMm8PTVuFUX1CrA3vD4"/>
-
-<!--Location permissions-->
-<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
+    <!--Location permissions-->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
 </manifest>
