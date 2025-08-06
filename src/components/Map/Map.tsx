@@ -38,7 +38,7 @@ const MyMap: React.FC = () => {
   return (
     <div className="component-wrapper" style={{ padding: '20px', maxWidth: '800px', margin: '0 auto' }}>
       <h2 style={{ marginBottom: '20px', color: '#333' }}>Google Maps Integration</h2>
-      <div
+      <capacitor-google-map
         ref={mapDivRef}
         id="map"
         style={{
@@ -52,7 +52,7 @@ const MyMap: React.FC = () => {
           overflow: 'hidden',
           position: 'relative',
         }}
-      ></div>
+      ></capacitor-google-map>
     </div>
   )
 }
