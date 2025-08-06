@@ -33,16 +33,17 @@ import '@ionic/react/css/palettes/dark.system.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import './App.css';
 
 setupIonicReact();
 
 const App: React.FC = () => {
   return (
-    <IonApp style={{ backgroundColor: 'transparent' }}>
+    <IonApp >
       <IonReactRouter >
-        <IonSplitPane contentId="main" style={{ backgroundColor: 'transparent' }}>
+        <IonSplitPane contentId="main" >
           <Menu />
-          <IonRouterOutlet id="main" style={{ backgroundColor: 'transparent' }}>
+          <IonRouterOutlet id="main" >
             <Route path="/" exact={true}>
               <Redirect to="/folder/Services" />
             </Route>
