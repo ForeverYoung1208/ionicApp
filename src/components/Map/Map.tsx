@@ -19,7 +19,7 @@ const MyMap: React.FC = () => {
             center: { lat: 33.6, lng: -117.9 },
             zoom: 8,
           },
-          apiKey: process.env.GOOGLE_MAPS_API_KEY!,
+          apiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY!,
         });
       } catch (error) {
         console.error('Error creating map:', error);
