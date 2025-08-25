@@ -24,31 +24,31 @@ interface AppPage {
 const appPages: AppPage[] = [
   {
     title: 'Login',
-    url: '/folder/Login',
+    url: '/Login',
     iosIcon: logInOutline,
     mdIcon: logInOutline
   },
   {
     title: 'Services',
-    url: '/folder/Services',
+    url: '/Services',
     iosIcon: mapOutline,
     mdIcon: mapOutline
   },
   {
     title: 'Supplyers',
-    url: '/folder/Supplyers',
+    url: '/Supplyers',
     iosIcon: paperPlaneOutline,
     mdIcon: paperPlaneSharp
   },
   {
     title: 'Customers',
-    url: '/folder/Customers',
+    url: '/Customers',
     iosIcon: archiveOutline,
     mdIcon: archiveSharp
   },
   {
     title: 'Admin',
-    url: '/folder/Admin',
+    url: '/Admin',
     iosIcon: warningOutline,
     mdIcon: warningSharp
   }
