@@ -2,3 +2,5 @@
 !/build/.npmkeep
 
 .env
+
+local.properties

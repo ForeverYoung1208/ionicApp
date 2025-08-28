@@ -35,7 +35,8 @@
         </provider>
         <!--My custom permissions-->
         <!--Google Maps API Key-->
-        <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyDkaiDJXshPWCm5YMm8PTVuFUX1CrA3vD4"/>
+        <meta-data android:name="com.google.android.geo.API_KEY" android:value="${MAPS_API_KEY}"/>
+
 
     </application>
 
@@ -44,5 +45,7 @@
     <!--Location permissions-->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+<uses-feature android:name="android.hardware.location.gps" />
+ 
 
 </manifest>
