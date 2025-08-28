@@ -1,6 +1,7 @@
 import { IonButtons, IonContent, IonHeader, IonItem, IonLabel, IonList, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import { ReactElement } from 'react';
 import './Services.css';
+import styled from '@emotion/styled';
 
 const Services: React.FC = () => {
 
@@ -19,7 +20,7 @@ const Services: React.FC = () => {
         </IonToolbar>
       </IonHeader>
 
-      <IonContent fullscreen>
+      <ServicesContent fullscreen>
         <IonHeader collapse="condense">
           <IonToolbar>
             <IonTitle size="large">{name}</IonTitle>
@@ -32,13 +33,13 @@ const Services: React.FC = () => {
             </IonItem>
           ))}
         </IonList>
-      </IonContent>
+      </ServicesContent>
     </IonPage>
   );
 };
 
 const ServicesContent = styled(IonContent)`
-  
-
+  background-color: var(--ion-color-light);
+`;
 
 export default Services;

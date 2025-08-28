@@ -4,6 +4,7 @@ import { IonButton } from '@ionic/react';
 import { Capacitor } from '@capacitor/core';
 import React, { useRef, useEffect, useState, useCallback } from 'react';
 import { useLogger } from '../../logger/useLogger';
+import styled from '@emotion/styled';
 
 const MyMap: React.FC = () => {
   const logger = useLogger();
@@ -72,9 +73,9 @@ const MyMap: React.FC = () => {
   }, [manualPosition, mapInstance]);
 
   return (
-    <>
-    <div className="component-wrapper" style={{ padding: '20px', maxWidth: '800px', margin: '0 auto' }}>
-      <h2 style={{ marginBottom: '20px', color: '#333' }}>Google Maps Integration</h2>
+  <>
+    <h2 style={{ marginBottom: '20px', color: '#333' }}>Google Maps Integration</h2>
+    <MapWrapper>
       <div
         ref={mapDivRef}
         id="map"
@@ -90,11 +91,18 @@ const MyMap: React.FC = () => {
           position: 'relative',
         }}
       ></div>
-    </div>
-      <IonButton onClick={() => setPositionToCurrentGPSData()}>reset coordinates</IonButton>  
-      {logger.messages}
+    </MapWrapper>
+    <IonButton onClick={() => setPositionToCurrentGPSData()}>reset coordinates</IonButton>  
+    {logger.messages}
   </>
   )
 }
+
+
+const MapWrapper = styled.div`
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+`;
 
 export default MyMap;

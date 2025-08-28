@@ -1,5 +1,5 @@
 import { IonButtons, IonContent, IonHeader, IonItem, IonLabel, IonList, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import './Customers.css';
+import styled from '@emotion/styled';
 
 const Customers: React.FC = () => {
   const customers = ['Customer1', 'Customer2', 'Customer3', 'Customer4', 'Customer5']
@@ -16,7 +16,7 @@ const Customers: React.FC = () => {
         </IonToolbar>
       </IonHeader>
 
-      <IonContent>
+      <CustomersContent>
         <IonList>
           {customers.map((customer, index) => (
             <IonItem key={index}>
@@ -24,9 +24,13 @@ const Customers: React.FC = () => {
             </IonItem>
           ))}
       </IonList>
-      </IonContent>
+      </CustomersContent>
     </IonPage>
   );
 }
+
+const CustomersContent = styled(IonContent)`
+  --background: var(--ion-color-light);
+`;
 
 export default Customers;
