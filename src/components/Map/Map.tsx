@@ -1,40 +1,42 @@
 import { Geolocation } from '@capacitor/geolocation';
 import { GoogleMap } from '@capacitor/google-maps';
 import { IonButton } from '@ionic/react';
+import { Capacitor } from '@capacitor/core';
 import React, { useRef, useEffect, useState, useCallback } from 'react';
+import { useLogger } from '../../logger/useLogger';
 
 const MyMap: React.FC = () => {
+  const logger = useLogger();
   const mapDivRef = useRef<HTMLDivElement>(null);
   const mapInstance = useRef<GoogleMap | null>(null);
-  const [aconsole, setAconsole] = useState<string[]>([]);
   const startingPosition = {
     lat: 33.6,
     lng: -117.9,
   };
   
-  
   const [manualPosition, setManualPosition] = useState(startingPosition);
   
-  const addToConsole = useCallback((message: string) => {
-      setAconsole(prev => [...prev, message]);
-  }, [] as Array<string>);
   const setPositionToCurrentGPSData = useCallback(async () => {
-    
     try {
-      
-    const permission = await Geolocation.requestPermissions();
-    if (permission.location !== 'granted') {
-      console.log('Location permission denied');
-      return;
-    }
-    } catch (error) {
-      addToConsole('Error requesting permissions: ' + JSON.stringify(error));
-    }    
+      if (Capacitor.isNativePlatform()) {
+        const permission = await Geolocation.requestPermissions();
+        if (permission.location !== 'granted') {
+          return;
+        }
+      }
 
-    const position = await Geolocation.getCurrentPosition();
-    setManualPosition({ lat: position.coords.latitude, lng: position.coords.longitude });
-    addToConsole('setting position ' + JSON.stringify(position.coords));
-  }, [addToConsole]);
+      const position = await Geolocation.getCurrentPosition({
+        enableHighAccuracy: true,
+        timeout: 10000
+      });
+      
+      logger.add('coordinates set', position.coords, position.coords);
+      setManualPosition({ lat: position.coords.latitude, lng: position.coords.longitude });
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      logger.add('Error getting location', error);
+    }
+  }, [logger]);
 
   useEffect(() => {
     if (!mapDivRef.current) return;
@@ -90,9 +92,7 @@ const MyMap: React.FC = () => {
       ></div>
     </div>
       <IonButton onClick={() => setPositionToCurrentGPSData()}>reset coordinates</IonButton>  
-      {aconsole.map((item, index) => (
-        <p key={index}>{item}</p>
-      ))}
+      {logger.messages}
   </>
   )
 }

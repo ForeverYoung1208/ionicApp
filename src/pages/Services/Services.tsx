@@ -37,4 +37,8 @@ const Services: React.FC = () => {
   );
 };
 
+const ServicesContent = styled(IonContent)`
+  
+
+
 export default Services;
