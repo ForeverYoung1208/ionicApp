@@ -8,11 +8,11 @@ export const MuiMultiselect: React.FC<{
   handleChange: (event: SelectChangeEvent<string[]>) => void,
   label?: string
 }> =
-({ items: customers, selectedItems: selectedCustomers, handleChange, label }) => {
+({ items: customers, selectedItems: selectedCustomers, handleChange, label = 'Select' }) => {
     return (
       <MultiSelectContainer>
           <MultiSelectStyled
-          input={label ? <OutlinedInput label={<InputLabel>{label}</InputLabel>} /> : undefined}
+            input={<OutlinedInput label={<InputLabel>{label}</InputLabel>} placeholder="Select" />}
             multiple
             value={selectedCustomers}
             onChange={(e) => handleChange(e as SelectChangeEvent<string[]>)}
@@ -42,6 +42,7 @@ const MultiSelectStyled = styled(Select)`
     opacity: 1;
     label {
       font-size: 10px;
+      transform: translateY(-2px);
     }
   }
   width: 50%;
