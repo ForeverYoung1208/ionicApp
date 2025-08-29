@@ -1,6 +1,5 @@
 import { IonButtons, IonContent, IonHeader, IonItem, IonLabel, IonList, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import { ReactElement } from 'react';
-import './Services.css';
 import styled from '@emotion/styled';
 
 const Services: React.FC = () => {
