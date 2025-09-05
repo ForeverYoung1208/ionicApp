@@ -1,6 +1,6 @@
 import { IonButton, IonTitle } from "@ionic/react";
 import styled from "@emotion/styled";
-import { ResponseTokenDto } from "../../api/dto/response-token.dto";
+import { ResponseTokenDto } from '../../api/dto/auth/response-token.dto';
 import { useAuthedUser } from "../../hooks/use-authed-user";
 
 export const CurrentUser: React.FC<

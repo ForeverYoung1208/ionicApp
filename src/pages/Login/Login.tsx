@@ -20,7 +20,7 @@ import { AuthService } from 'src/api/services/auth-service';
 import { useCallback, useState } from 'react';
 import { CurrentUser } from './CurrentUser';
 import { useLocalstorage } from '../../hooks/use-local-storage';
-import { ResponseTokenDto } from '../../api/dto/response-token.dto';
+import { ResponseTokenDto } from '../../api/dto/auth/response-token.dto';
 
 const Login: React.FC = () => {
   const [credentials, setCredentials] = useState({ email: '', password: '' });

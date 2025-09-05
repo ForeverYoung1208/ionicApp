@@ -1,6 +1,6 @@
 import { transport } from "src/api/transport/transport";
-import { AuthDto } from "../dto/auth.dto";
-import { ResponseTokenDto } from "../dto/response-token.dto";
+import { AuthDto } from '../dto/auth/auth.dto';
+import { ResponseTokenDto } from '../dto/auth/response-token.dto';
 import { ENDPOINTS } from "../constants";
 
 export class AuthService {

@@ -1,4 +1,4 @@
-import { ApiProperty } from './mock-nest/decorators';
+import { ApiProperty } from '../mock-nest/decorators';
 import { Expose } from 'class-transformer';
 import { IsString } from 'class-validator';
 
