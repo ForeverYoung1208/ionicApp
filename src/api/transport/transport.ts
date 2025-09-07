@@ -1,13 +1,14 @@
 import { BASE_URL } from '../constants';
-import { TransportOptions } from '../types';
+import { TEndpoint, TransportOptions } from '../types';
 import { BaseTransport } from './base-transoport';
 
 interface ITransport {
-  get: <T>(endpoint: string) => Promise<T>;
-  post: <T>(endpoint: string, data: object) => Promise<T>;
-  put: <T>(endpoint: string, data: object) => Promise<T>;
-  patch: <T>(endpoint: string, data: object) => Promise<T>;
-  delete: <T>(endpoint: string) => Promise<T>;
+  get: <T>(endpoint: string, options: TransportOptions) => Promise<T>;
+  post: <T>(endpoint: string, data: object | null, options: TransportOptions) => Promise<T>;
+  put: <T>(endpoint: string, data: object, options: TransportOptions) => Promise<T>;
+  patch: <T>(endpoint: string, data: object, options: TransportOptions) => Promise<T>;
+  delete: <T>(endpoint: string, options: TransportOptions) => Promise<T>;
+  useEndpoint: <T>(endpoint: TEndpoint, data: object | null) => Promise<T>;
 }
 
 class FetchTransport extends BaseTransport implements ITransport {
