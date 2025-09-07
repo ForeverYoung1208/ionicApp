@@ -4,7 +4,7 @@ export type TransportOptions = {
 };
 
 export type TEndpoint = {
-  url: string;
+  url: (params?: Record<string, string>) => string;
   options: TransportOptions;
   method: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
 };
@@ -17,5 +17,5 @@ export interface ITransport {
   put: <T>(endpoint: string, data: object, options: TransportOptions) => Promise<T>;
   patch: <T>(endpoint: string, data: object, options: TransportOptions) => Promise<T>;
   delete: <T>(endpoint: string, options: TransportOptions) => Promise<T>;
-  useEndpoint: <T>(endpoint: TEndpoint, data: object | null) => Promise<T>;
+  useEndpoint: <T>(endpoint: TEndpoint, data: object | null, params?: Record<string, string>) => Promise<T>;
 }

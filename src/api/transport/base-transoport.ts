@@ -10,28 +10,28 @@ export abstract class BaseTransport {
   abstract patch<T>(endpoint: string, data: object, options: TransportOptions): Promise<T>;
   abstract delete<T>(endpoint: string, options: TransportOptions): Promise<T>;
 
-  public async useEndpoint<T>(endpoint: TEndpoint, data?: object | null): Promise<T> {
+  public async useEndpoint<T>(endpoint: TEndpoint, data?: object | null, params?: Record<string, string>): Promise<T> {
     switch (endpoint.method) {
       case 'GET':
-        return this.get<T>(endpoint.url, endpoint.options);
+        return this.get<T>(endpoint.url(params), endpoint.options);
       case 'POST':
-        return this.post<T>(endpoint.url, data ?? null, endpoint.options);
+        return this.post<T>(endpoint.url(params), data ?? null, endpoint.options);
       case 'PUT': {
         if (!data) {
           console.error('Data is required for PUT request, default to {}');
           data = {};
         }
-        return this.put<T>(endpoint.url, data, endpoint.options);
+        return this.put<T>(endpoint.url(params), data, endpoint.options);
       }
       case 'PATCH': {
         if (!data) {
           console.error('Data is required for PATCH request, default to {}');
           data = {};
         }
-        return this.patch<T>(endpoint.url, data, endpoint.options);
+        return this.patch<T>(endpoint.url(params), data, endpoint.options);
       }
       case 'DELETE':
-        return this.delete<T>(endpoint.url, endpoint.options);
+        return this.delete<T>(endpoint.url(params), endpoint.options);
     }
   }
 
@@ -56,7 +56,7 @@ export abstract class BaseTransport {
 
   protected async refreshTokens(): Promise<ResponseTokenDto> {
     const tokens = JSON.parse(localStorage.getItem('auth') || '{}') as ResponseTokenDto;
-    const newTokens = await this.post<ResponseTokenDto>(ENDPOINTS.auth.refresh.url, null, {
+    const newTokens = await this.post<ResponseTokenDto>(ENDPOINTS.auth.refresh.url(), null, {
       customHeaders: { Authorization: `Bearer ${tokens.refreshToken}` },
     });
     localStorage.setItem('auth', JSON.stringify(newTokens));
