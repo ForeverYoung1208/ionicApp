@@ -53,17 +53,21 @@ const Login: React.FC = () => {
                 <div className="login-form">
                   <IonList>
                     <IonItem>
-                      <IonLabel position="floating">Enter your username</IonLabel>
+                      <IonLabel position="floating">Enter your email</IonLabel>
                       <IonInput
-                        placeholder="Username"
+                        type="email"
+                        placeholder="Email"
                         value={credentials.email}
+                        autocomplete="username"
                         onIonChange={(e) => setCredentials({ ...credentials, email: e.detail.value! })}
+                        onIonInput={(e) => setCredentials({ ...credentials, email: e.detail.value! })}
                       />
                     </IonItem>
                     <IonItem>
                       <IonLabel position="floating">Enter your password</IonLabel>
                       <IonInput
                         type="password"
+                        autocomplete="current-password"
                         placeholder="Password"
                         value={credentials.password}
                         onIonChange={(e) => setCredentials({ ...credentials, password: e.detail.value! })}

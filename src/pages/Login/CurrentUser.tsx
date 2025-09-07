@@ -9,6 +9,7 @@ export const CurrentUser: React.FC<
   
   const handleLogout = () => {
     setTokens({ accessToken: '', refreshToken: '' });
+    window.location.reload();
   };
   
   const { sub: userId } = useAuthedUser();

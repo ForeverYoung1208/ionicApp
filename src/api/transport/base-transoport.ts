@@ -10,12 +10,12 @@ export abstract class BaseTransport {
   abstract patch<T>(endpoint: string, data: object, options: TransportOptions): Promise<T>;
   abstract delete<T>(endpoint: string, options: TransportOptions): Promise<T>;
 
-  public async useEndpoint<T>(endpoint: TEndpoint, data: object | null): Promise<T> {
+  public async useEndpoint<T>(endpoint: TEndpoint, data?: object | null): Promise<T> {
     switch (endpoint.method) {
       case 'GET':
         return this.get<T>(endpoint.url, endpoint.options);
       case 'POST':
-        return this.post<T>(endpoint.url, data, endpoint.options);
+        return this.post<T>(endpoint.url, data ?? null, endpoint.options);
       case 'PUT': {
         if (!data) {
           console.error('Data is required for PUT request, default to {}');
