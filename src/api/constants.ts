@@ -1,12 +1,14 @@
+import { TEndpoints } from './types';
+
 export const CONTENT_TYPE_APPLICATION_JSON = 'application/json';
 export const BASE_URL = import.meta.env.VITE_API_SERVER_URL;
 
-export const ENDPOINTS = {
+export const ENDPOINTS: TEndpoints = {
   auth: {
-    signin: 'auth/signin',
+    signin: { url: 'auth/signin', method: 'POST', options: { auth: false } },
+    refresh: { url: 'auth/refresh', method: 'POST', options: { auth: false } },
   },
   users: {
-    getAll: 'users',
+    getAll: { url: 'users', method: 'GET', options: { auth: true } },
   },
 };
-  

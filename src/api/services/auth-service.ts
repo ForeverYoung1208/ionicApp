@@ -5,7 +5,7 @@ import { ENDPOINTS } from "../constants";
 
 export class AuthService {
   async login(credentials: AuthDto, setTokens: (tokens: ResponseTokenDto) => void) {
-    const tokens = await transport.post<ResponseTokenDto>(ENDPOINTS.auth.signin, credentials);
+    const tokens = await transport.post<ResponseTokenDto>(ENDPOINTS.auth.signin.url, credentials);
     setTokens(tokens);
   }
 }

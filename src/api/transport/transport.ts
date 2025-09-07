@@ -1,58 +1,56 @@
-import { CONTENT_TYPE_APPLICATION_JSON, BASE_URL } from "../constants";
+import { BASE_URL } from '../constants';
+import { TransportOptions } from '../types';
+import { BaseTransport } from './base-transoport';
 
 interface ITransport {
-  get:<T> (endpoint: string) => Promise<T>;
-  post: <T> (endpoint: string, data: object) => Promise<T>;
-  put: <T> (endpoint: string, data: object) => Promise<T>;
-  patch: <T> (endpoint: string, data: object) => Promise<T>;
-  delete: <T> (endpoint: string) => Promise<T>;
+  get: <T>(endpoint: string) => Promise<T>;
+  post: <T>(endpoint: string, data: object) => Promise<T>;
+  put: <T>(endpoint: string, data: object) => Promise<T>;
+  patch: <T>(endpoint: string, data: object) => Promise<T>;
+  delete: <T>(endpoint: string) => Promise<T>;
 }
 
-class FetchTransport implements ITransport {
-  private commonHeaders = {
-    'Content-Type': CONTENT_TYPE_APPLICATION_JSON,
+class FetchTransport extends BaseTransport implements ITransport {
+  constructor(private baseUrl: string) {
+    super();
   }
-  
-  constructor(
-    private baseUrl: string
-  ) {}
-  
-  async get<T>(endpoint: string) {
+
+  async get<T>(endpoint: string, options?: TransportOptions) {
     return fetch(`${this.baseUrl}/${endpoint}`, {
       method: 'GET',
-      headers: this.commonHeaders,
-    }).then(res => res.json() as Promise<T>);
+      headers: this.composeHeaders(options),
+    }).then((res) => res.json() as Promise<T>);
   }
-  
-  async post<T>(endpoint: string, data: object) {
+
+  async post<T>(endpoint: string, data: object | null, options?: TransportOptions) {
     return fetch(`${this.baseUrl}/${endpoint}`, {
       method: 'POST',
-      headers: this.commonHeaders,
-      body: JSON.stringify(data),
-    }).then(res => res.json() as Promise<T>);
+      headers: this.composeHeaders(options),
+      body: data ? JSON.stringify(data) : null,
+    }).then((res) => res.json() as Promise<T>);
   }
-  
-  async put<T>(endpoint: string, data: object) {
+
+  async put<T>(endpoint: string, data: object, options?: TransportOptions) {
     return fetch(`${this.baseUrl}/${endpoint}`, {
       method: 'PUT',
-      headers: this.commonHeaders,
+      headers: this.composeHeaders(options),
       body: JSON.stringify(data),
-    }).then(res => res.json() as Promise<T>);
-  } 
-  
-  async patch<T>(endpoint: string, data: object) {
+    }).then((res) => res.json() as Promise<T>);
+  }
+
+  async patch<T>(endpoint: string, data: object, options?: TransportOptions) {
     return fetch(`${this.baseUrl}/${endpoint}`, {
       method: 'PATCH',
-      headers: this.commonHeaders,
+      headers: this.composeHeaders(options),
       body: JSON.stringify(data),
-    }).then(res => res.json() as Promise<T>);
+    }).then((res) => res.json() as Promise<T>);
   }
-  
-  async delete<T>(endpoint: string) {
+
+  async delete<T>(endpoint: string, options?: TransportOptions) {
     return fetch(`${this.baseUrl}/${endpoint}`, {
       method: 'DELETE',
-      headers: this.commonHeaders,
-    }).then(res => res.json() as Promise<T>);
+      headers: this.composeHeaders(options),
+    }).then((res) => res.json() as Promise<T>);
   }
 }
 
