@@ -1,5 +1,4 @@
 import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import './Supplyers.css';
 import MyMap from '../../components/Map/Map';
 
 const Supplyers: React.FC = () => {

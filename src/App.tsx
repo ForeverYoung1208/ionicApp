@@ -37,16 +37,17 @@ import Services from './pages/Services/Services';
 import Supplyers from './pages/Supplyers/Supplyers';
 import Customers from './pages/Customers/Customers';
 import Login from './pages/Login/Login';
+import AdminPage from './pages/Admin/Admin';
 
 setupIonicReact();
 
 const App: React.FC = () => {
   return (
-    <IonApp >
-      <IonReactRouter >
-        <IonSplitPane contentId="main" >
+    <IonApp>
+      <IonReactRouter>
+        <IonSplitPane contentId="main">
           <Menu />
-          <IonRouterOutlet id="main" >
+          <IonRouterOutlet id="main">
             <Route path="/" exact={true}>
               <Redirect to="/Services" />
             </Route>
@@ -61,6 +62,9 @@ const App: React.FC = () => {
             </Route>
             <Route path="/Login" exact={true}>
               <Login />
+            </Route>
+            <Route path="/Admin" exact={true}>
+              <AdminPage />
             </Route>
           </IonRouterOutlet>
         </IonSplitPane>
