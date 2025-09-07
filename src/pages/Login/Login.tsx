@@ -17,20 +17,26 @@ import {
 } from '@ionic/react';
 import './Login.css';
 import { AuthService } from 'src/api/services/auth-service';
-import { useCallback, useState } from 'react';
+import { useCallback } from 'react';
 import { CurrentUser } from './CurrentUser';
 import { useLocalstorage } from '../../hooks/use-local-storage';
 import { ResponseTokenDto } from '../../api/dto/auth/response-token.dto';
 
 const Login: React.FC = () => {
-  const [credentials, setCredentials] = useState({ email: '', password: '' });
+  // const [credentials, setCredentials] = useState({ email: '', password: '' });
 
   const [{ accessToken }, setTokens] = useLocalstorage<ResponseTokenDto>('auth', { accessToken: '', refreshToken: '' });
 
-  const handleSignin = useCallback(() => {
-    const authService = new AuthService();
-    authService.login(credentials, setTokens);
-  }, [credentials, setTokens]);
+  const handleSignin = useCallback(
+    (e: React.FormEvent) => {
+      e.preventDefault();
+      const email = (e.currentTarget as HTMLFormElement).email?.value;
+      const password = (e.currentTarget as HTMLFormElement).password?.value;
+      const authService = new AuthService();
+      authService.login({ email, password }, setTokens);
+    },
+    [setTokens],
+  );
 
   return (
     <IonPage>
@@ -51,32 +57,26 @@ const Login: React.FC = () => {
                 <CurrentUser setTokens={setTokens} />
               ) : (
                 <div className="login-form">
-                  <IonList>
-                    <IonItem>
-                      <IonLabel position="floating">Enter your email</IonLabel>
-                      <IonInput
-                        type="email"
-                        placeholder="Email"
-                        value={credentials.email}
-                        autocomplete="username"
-                        onIonChange={(e) => setCredentials({ ...credentials, email: e.detail.value! })}
-                        onIonInput={(e) => setCredentials({ ...credentials, email: e.detail.value! })}
-                      />
-                    </IonItem>
-                    <IonItem>
-                      <IonLabel position="floating">Enter your password</IonLabel>
-                      <IonInput
-                        type="password"
-                        autocomplete="current-password"
-                        placeholder="Password"
-                        value={credentials.password}
-                        onIonChange={(e) => setCredentials({ ...credentials, password: e.detail.value! })}
-                      />
-                    </IonItem>
-                  </IonList>
-                  <IonButton fill="solid" expand="block" onClick={handleSignin}>
-                    Sign in
-                  </IonButton>
+                  <form onSubmit={handleSignin}>
+                    <IonList>
+                      <IonItem>
+                        <IonLabel position="floating">Enter your email</IonLabel>
+                        <IonInput type="email" placeholder="Email" autocomplete="username" name="email" />
+                      </IonItem>
+                      <IonItem>
+                        <IonLabel position="floating">Enter your password</IonLabel>
+                        <IonInput
+                          type="password"
+                          autocomplete="current-password"
+                          placeholder="Password"
+                          name="password"
+                        />
+                      </IonItem>
+                    </IonList>
+                    <IonButton fill="solid" expand="block" type="submit">
+                      Sign in
+                    </IonButton>
+                  </form>
                 </div>
               )}
             </IonCol>
