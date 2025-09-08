@@ -11,9 +11,11 @@ jobs:
     if: github.event.pull_request.merged
     runs-on: ubuntu-latest
     env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      VITE_GOOGLE_MAPS_API_KEY: ${{ secrets.VITE_GOOGLE_MAPS_API_KEY }}
       CODE_BUCKET: ${{vars.CODE_BUCKET}}
       AWS_REGION: ${{ vars.AWS_REGION }}
-      VITE_GOOGLE_MAPS_API_KEY: ${{ vars.VITE_GOOGLE_MAPS_API_KEY }}
       VITE_API_SERVER_URL: ${{ vars.VITE_API_SERVER_URL }}
       CLOUDFRONT_DISTRIBUTION_ID: ${{ vars.CLOUDFRONT_DISTRIBUTION_ID }}
   
@@ -38,8 +40,6 @@ jobs:
       - if: ${{ steps.cache-ui.outputs.cache-hit != 'true' }}
         name: Build 
         run: |
-          export VITE_GOOGLE_MAPS_API_KEY="${{ vars.VITE_GOOGLE_MAPS_API_KEY }}"
-          export VITE_API_SERVER_URL="${{ vars.VITE_API_SERVER_URL }}"
           npm ci
           npm run build
 
