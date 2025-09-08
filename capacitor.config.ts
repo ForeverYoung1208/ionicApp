@@ -6,8 +6,18 @@ const config: CapacitorConfig = {
   webDir: 'dist',
   android: {
     minWebViewVersion: 55,
-    backgroundColor: "#00000000",
-  },  
+    backgroundColor: '#00000000',
+    allowMixedContent: true, // remove when using https
+  },
+  server: {
+    androidScheme: 'http', // remove when using https
+    cleartext: true, // remove when using https
+  },
+  plugins: {
+    CapacitorHttp: {
+      enabled: true,
+    },
+  },
 };
 
 export default config;
