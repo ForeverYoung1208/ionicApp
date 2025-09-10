@@ -16,25 +16,27 @@ import {
   IonButton,
 } from '@ionic/react';
 import './Login.css';
-import { AuthService } from 'src/api/services/auth-service';
 import { useCallback } from 'react';
 import { CurrentUser } from './CurrentUser';
-import { useLocalstorage } from '../../hooks/use-local-storage';
-import { ResponseTokenDto } from '../../api/dto/auth/response-token.dto';
+import { signIn } from '../../redux/reducers/auth/actionCreators/signIn';
+import { useAppDispatch } from '../../redux/store/store';
+import { authedUserSelector } from '../../redux/selectors/authSelectors';
+import { useSelector } from 'react-redux';
 
 const Login: React.FC = () => {
-  const [{ accessToken }, setTokens] = useLocalstorage<ResponseTokenDto>('auth', { accessToken: '', refreshToken: '' });
+  const dispatch = useAppDispatch();
 
   const handleSignin = useCallback(
     (e: React.FormEvent) => {
       e.preventDefault();
       const email = (e.currentTarget as HTMLFormElement).email?.value;
       const password = (e.currentTarget as HTMLFormElement).password?.value;
-      const authService = new AuthService();
-      authService.login({ email, password }, setTokens);
+      dispatch(signIn({ email, password }));
     },
-    [setTokens],
+    [dispatch],
   );
+
+  const authedUser = useSelector(authedUserSelector);
 
   return (
     <IonPage>
@@ -51,8 +53,8 @@ const Login: React.FC = () => {
         <IonGrid className="login-container">
           <IonRow className="ion-justify-content-center">
             <IonCol size="12" sizeMd="8" sizeLg="6" sizeXl="4">
-              {accessToken?.length > 0 ? (
-                <CurrentUser setTokens={setTokens} />
+              {authedUser ? (
+                <CurrentUser authedUser={authedUser} />
               ) : (
                 <div className="login-form">
                   <form onSubmit={handleSignin}>

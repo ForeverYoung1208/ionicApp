@@ -10,5 +10,6 @@ export const ENDPOINTS: TEndpoints = {
   },
   users: {
     getAll: { url: () => 'users', method: 'GET', options: { auth: true } },
+    getById: { url: (params) => `users/${params?.id}`, method: 'GET', options: { auth: true } },
   },
 };

@@ -1,9 +1,9 @@
 export type TAuthedUser = {
   id: string;
   name: string;
-}
+};
 
-export type TUsersState = {
+export type TAuthedUserState = {
   authedUser: TAuthedUser | null;
   isLoading: boolean;
 };

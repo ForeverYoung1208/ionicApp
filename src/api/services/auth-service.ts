@@ -4,8 +4,8 @@ import { ResponseTokenDto } from '../dto/auth/response-token.dto';
 import { ENDPOINTS } from "../constants";
 
 export class AuthService {
-  async login(credentials: AuthDto, setTokens: (tokens: ResponseTokenDto) => void) {
+  async signIn(credentials: AuthDto): Promise<ResponseTokenDto> {
     const tokens = await transport.post<ResponseTokenDto>(ENDPOINTS.auth.signin.url(), credentials);
-    setTokens(tokens);
+    return tokens;
   }
 }

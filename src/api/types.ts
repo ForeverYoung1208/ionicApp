@@ -4,7 +4,7 @@ export type TransportOptions = {
 };
 
 export type TEndpoint = {
-  url: (params?: Record<string, string>) => string;
+  url: (params?: { [key: string]: string }) => string;
   options: TransportOptions;
   method: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
 };

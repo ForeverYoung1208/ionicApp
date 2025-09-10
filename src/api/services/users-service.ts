@@ -8,4 +8,9 @@ export class UsersService {
     const response = await transport.useEndpoint<IListResponse<UserDto>>(ENDPOINTS.users.getAll);
     return response;
   }
+
+  async getById(id: string): Promise<UserDto> {
+    const response = await transport.useEndpoint<UserDto>(ENDPOINTS.users.getById, null, { id });
+    return response;
+  }
 }
