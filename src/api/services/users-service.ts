@@ -4,7 +4,7 @@ import { UserDto } from '../dto/users/user.dto';
 import { IListResponse } from '../../interfaces/list-response.interface';
 
 export class UsersService {
-  async getAll() {
+  async getAll(): Promise<IListResponse<UserDto>> {
     const response = await transport.useEndpoint<IListResponse<UserDto>>(ENDPOINTS.users.getAll);
     return response;
   }

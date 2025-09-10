@@ -1,9 +1,9 @@
-import { combineReducers } from "redux";
-import { customersReducer } from "../reducers/customers/customersSlice";
+import { combineReducers } from 'redux';
+import { customersReducer } from '../reducers/customers/customersSlice';
+import { usersReducer } from '../reducers/users/usersSlice';
 
-export const rootReducer = (state, action) => {
-
-  return combineReducers({
-    customers: customersReducer
-  });
-};
+export const rootReducer = combineReducers({
+  customers: customersReducer,
+  users: usersReducer,
+});
+export type TRootState = ReturnType<typeof rootReducer>;

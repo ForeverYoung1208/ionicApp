@@ -38,37 +38,41 @@ import Supplyers from './pages/Supplyers/Supplyers';
 import Customers from './pages/Customers/Customers';
 import Login from './pages/Login/Login';
 import AdminPage from './pages/Admin/Admin';
+import { Provider } from 'react-redux';
+import { store } from './redux/store/store';
 
 setupIonicReact();
 
 const App: React.FC = () => {
   return (
     <IonApp>
-      <IonReactRouter>
-        <IonSplitPane contentId="main">
-          <Menu />
-          <IonRouterOutlet id="main">
-            <Route path="/" exact={true}>
-              <Redirect to="/Services" />
-            </Route>
-            <Route path="/Services" exact={true}>
-              <Services />
-            </Route>
-            <Route path="/Supplyers" exact={true}>
-              <Supplyers />
-            </Route>
-            <Route path="/Customers" exact={true}>
-              <Customers />
-            </Route>
-            <Route path="/Login" exact={true}>
-              <Login />
-            </Route>
-            <Route path="/Admin" exact={true}>
-              <AdminPage />
-            </Route>
-          </IonRouterOutlet>
-        </IonSplitPane>
-      </IonReactRouter>
+      <Provider store={store}>
+        <IonReactRouter>
+          <IonSplitPane contentId="main">
+            <Menu />
+            <IonRouterOutlet id="main">
+              <Route path="/" exact={true}>
+                <Redirect to="/Services" />
+              </Route>
+              <Route path="/Services" exact={true}>
+                <Services />
+              </Route>
+              <Route path="/Supplyers" exact={true}>
+                <Supplyers />
+              </Route>
+              <Route path="/Customers" exact={true}>
+                <Customers />
+              </Route>
+              <Route path="/Login" exact={true}>
+                <Login />
+              </Route>
+              <Route path="/Admin" exact={true}>
+                <AdminPage />
+              </Route>
+            </IonRouterOutlet>
+          </IonSplitPane>
+        </IonReactRouter>
+      </Provider>
     </IonApp>
   );
 };

@@ -23,8 +23,6 @@ import { useLocalstorage } from '../../hooks/use-local-storage';
 import { ResponseTokenDto } from '../../api/dto/auth/response-token.dto';
 
 const Login: React.FC = () => {
-  // const [credentials, setCredentials] = useState({ email: '', password: '' });
-
   const [{ accessToken }, setTokens] = useLocalstorage<ResponseTokenDto>('auth', { accessToken: '', refreshToken: '' });
 
   const handleSignin = useCallback(
