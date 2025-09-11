@@ -1,6 +1,6 @@
-import { IonApp, IonRouterOutlet, IonSplitPane, setupIonicReact } from '@ionic/react';
+import { IonApp, IonPage, IonRouterOutlet, IonSplitPane, setupIonicReact } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { Redirect, Route } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import Menu from './components/Menu/Menu';
 
 /* Core CSS required for Ionic components to work properly */
@@ -33,13 +33,9 @@ import '@ionic/react/css/palettes/dark.system.css';
 /* Theme variables */
 import './theme/variables.css';
 import './App.css';
-import Services from './pages/Services/Services';
-import Supplyers from './pages/Supplyers/Supplyers';
-import Customers from './pages/Customers/Customers';
-import Login from './pages/Login/Login';
-import AdminPage from './pages/Admin/Admin';
 import { Provider } from 'react-redux';
 import { store } from './redux/store/store';
+import { routes } from './routes/routes';
 
 setupIonicReact();
 
@@ -51,24 +47,24 @@ const App: React.FC = () => {
           <IonSplitPane contentId="main">
             <Menu />
             <IonRouterOutlet id="main">
-              <Route path="/" exact={true}>
-                <Redirect to="/Services" />
-              </Route>
-              <Route path="/Services" exact={true}>
-                <Services />
-              </Route>
-              <Route path="/Supplyers" exact={true}>
-                <Supplyers />
-              </Route>
-              <Route path="/Customers" exact={true}>
-                <Customers />
-              </Route>
-              <Route path="/Login" exact={true}>
-                <Login />
-              </Route>
-              <Route path="/Admin" exact={true}>
-                <AdminPage />
-              </Route>
+              {routes.map((route) => (
+                <Route
+                  key={route.path}
+                  path={route.path}
+                  exact={true}
+                  render={(props) => (
+                    <IonPage>
+                      {route.guard ? (
+                        <route.guard options={route.guardOptions || {}}>
+                          <route.component {...props} />
+                        </route.guard>
+                      ) : (
+                        <route.component {...props} />
+                      )}
+                    </IonPage>
+                  )}
+                />
+              ))}
             </IonRouterOutlet>
           </IonSplitPane>
         </IonReactRouter>

@@ -1,4 +1,4 @@
-import { IonButtons, IonContent, IonHeader, IonItem, IonLabel, IonList, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import styled from '@emotion/styled';
 import React, { useEffect } from 'react';
 import { UsersList } from './UsersList/UsersList';
@@ -9,17 +9,6 @@ import { allUsersSelector, totalUsersSelector } from '../../redux/selectors/user
 import { Typography } from '@mui/material';
 
 const AdminPage: React.FC = () => {
-  // const [users, setUsers] = React.useState<UserDto[]>([]);
-  // const usersService = useMemo(() => new UsersService(), []); // todo: move to context or redux
-
-  // useEffect(() => {
-  //   const fetchUsers = async () => {
-  //     const { data } = await usersService.getAll();
-  //     setUsers(data);
-  //   };
-  //   fetchUsers();
-  // }, [usersService]);
-
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(getUsers());
@@ -29,7 +18,7 @@ const AdminPage: React.FC = () => {
   const total = useSelector(totalUsersSelector);
 
   return (
-    <IonPage>
+    <>
       <IonHeader>
         <IonToolbar>
           <IonButtons slot="start">
@@ -45,7 +34,7 @@ const AdminPage: React.FC = () => {
         </UsersListContainerStyled>
         <TotalUsersStyled>Total users: {total}</TotalUsersStyled>
       </AdminContentStyled>
-    </IonPage>
+    </>
   );
 };
 
