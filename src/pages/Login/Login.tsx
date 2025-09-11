@@ -39,51 +39,40 @@ const Login: React.FC = () => {
   const authedUser = useSelector(authedUserSelector);
 
   return (
-    <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonButtons slot="start">
-            <IonMenuButton />
-          </IonButtons>
-          <IonTitle>Login</IonTitle>
-        </IonToolbar>
-      </IonHeader>
-
-      <IonContent className="login-content">
-        <IonGrid className="login-container">
-          <IonRow className="ion-justify-content-center">
-            <IonCol size="12" sizeMd="8" sizeLg="6" sizeXl="4">
-              {authedUser ? (
-                <CurrentUser authedUser={authedUser} />
-              ) : (
-                <div className="login-form">
-                  <form onSubmit={handleSignin}>
-                    <IonList>
-                      <IonItem>
-                        <IonLabel position="floating">Enter your email</IonLabel>
-                        <IonInput type="email" placeholder="Email" autocomplete="username" name="email" />
-                      </IonItem>
-                      <IonItem>
-                        <IonLabel position="floating">Enter your password</IonLabel>
-                        <IonInput
-                          type="password"
-                          autocomplete="current-password"
-                          placeholder="Password"
-                          name="password"
-                        />
-                      </IonItem>
-                    </IonList>
-                    <IonButton fill="solid" expand="block" type="submit">
-                      Sign in
-                    </IonButton>
-                  </form>
-                </div>
-              )}
-            </IonCol>
-          </IonRow>
-        </IonGrid>
-      </IonContent>
-    </IonPage>
+    <div>
+      <IonGrid className="login-container">
+        <IonRow className="ion-justify-content-center">
+          <IonCol size="12" sizeMd="8" sizeLg="6" sizeXl="4">
+            {authedUser ? (
+              <CurrentUser authedUser={authedUser} />
+            ) : (
+              <div className="login-form">
+                <form onSubmit={handleSignin}>
+                  <IonList>
+                    <IonItem>
+                      <IonLabel position="floating">Enter your email</IonLabel>
+                      <IonInput type="email" placeholder="Email" autocomplete="username" name="email" />
+                    </IonItem>
+                    <IonItem>
+                      <IonLabel position="floating">Enter your password</IonLabel>
+                      <IonInput
+                        type="password"
+                        autocomplete="current-password"
+                        placeholder="Password"
+                        name="password"
+                      />
+                    </IonItem>
+                  </IonList>
+                  <IonButton fill="solid" expand="block" type="submit">
+                    Sign in
+                  </IonButton>
+                </form>
+              </div>
+            )}
+          </IonCol>
+        </IonRow>
+      </IonGrid>
+    </div>
   );
 };
 

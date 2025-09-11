@@ -25,42 +25,31 @@ const Customers: React.FC = () => {
   };
 
   return (
-    <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonButtons slot="start">
-            <IonMenuButton />
-          </IonButtons>
-          <IonTitle>{name}</IonTitle>
-        </IonToolbar>
-      </IonHeader>
-
-      <CustomersContentStyled>
-        {allCustomers.map((customer, index) => (
+    <CustomersContentStyled>
+      {allCustomers.map((customer, index) => (
+        <IonItem key={index}>
+          <IonLabel>{customer.name}</IonLabel>
+        </IonItem>
+      ))}
+      <IonList>
+        {customers.map((customer, index) => (
           <IonItem key={index}>
-            <IonLabel>{customer.name}</IonLabel>
+            <IonLabel>{customer}</IonLabel>
           </IonItem>
         ))}
-        <IonList>
-          {customers.map((customer, index) => (
-            <IonItem key={index}>
-              <IonLabel>{customer}</IonLabel>
-            </IonItem>
-          ))}
-        </IonList>
+      </IonList>
 
-        <MuiMultiselect
-          items={customers}
-          selectedItems={selectedCustomers}
-          handleChange={handleChange}
-          label="Customers"
-        />
-      </CustomersContentStyled>
-    </IonPage>
+      <MuiMultiselect
+        items={customers}
+        selectedItems={selectedCustomers}
+        handleChange={handleChange}
+        label="Customers"
+      />
+    </CustomersContentStyled>
   );
 };
 
-const CustomersContentStyled = styled(IonContent)`
+const CustomersContentStyled = styled.div`
   --background: var(--ion-color-light);
 `;
 

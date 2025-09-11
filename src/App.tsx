@@ -56,10 +56,14 @@ const App: React.FC = () => {
                     <IonPage>
                       {route.guard ? (
                         <route.guard options={route.guardOptions || {}}>
-                          <route.component {...props} />
+                          <route.layout {...route.layoutProps}>
+                            <route.component {...props} />
+                          </route.layout>
                         </route.guard>
                       ) : (
-                        <route.component {...props} />
+                        <route.layout {...route.layoutProps}>
+                          <route.component {...props} />
+                        </route.layout>
                       )}
                     </IonPage>
                   )}

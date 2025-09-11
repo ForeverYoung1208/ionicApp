@@ -25,8 +25,6 @@ interface MenuItem {
   isShown: (authedUser: TAuthedUser | null) => boolean;
 }
 
-const isUserAuthed = (authedUser: TAuthedUser | null) => !!authedUser?.id;
-
 const menuItems: MenuItem[] = [
   {
     title: 'Login',
@@ -61,7 +59,7 @@ const menuItems: MenuItem[] = [
     url: '/Admin',
     iosIcon: warningOutline,
     mdIcon: warningSharp,
-    isShown: isUserAuthed,
+    isShown: (authedUser: TAuthedUser | null) => !!authedUser?.id,
   },
 ];
 
@@ -73,8 +71,8 @@ const Menu: React.FC = () => {
     <IonMenu contentId="main" type="overlay">
       <IonContent>
         <IonList id="inbox-list">
-          <IonListHeader>Hello</IonListHeader>
-          <IonNote>Dear guest, login or register to get access to all features</IonNote>
+          <IonListHeader>Hello{authedUser?.name ? `, ${authedUser.name}` : ''}</IonListHeader>
+          {!authedUser?.name ? <IonNote>Dear guest, login or register to get access to all features</IonNote> : null}
           {menuItems.map((appPage, index) => {
             return appPage.isShown(authedUser) ? (
               <IonMenuToggle key={index} autoHide={false}>

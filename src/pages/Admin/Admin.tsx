@@ -18,27 +18,16 @@ const AdminPage: React.FC = () => {
   const total = useSelector(totalUsersSelector);
 
   return (
-    <>
-      <IonHeader>
-        <IonToolbar>
-          <IonButtons slot="start">
-            <IonMenuButton />
-          </IonButtons>
-          <IonTitle>Admin panel</IonTitle>
-        </IonToolbar>
-      </IonHeader>
-
-      <AdminContentStyled>
-        <UsersListContainerStyled>
-          <UsersList users={users} />
-        </UsersListContainerStyled>
-        <TotalUsersStyled>Total users: {total}</TotalUsersStyled>
-      </AdminContentStyled>
-    </>
+    <AdminContentStyled>
+      <UsersListContainerStyled>
+        <UsersList users={users} />
+      </UsersListContainerStyled>
+      <TotalUsersStyled>Total users: {total}</TotalUsersStyled>
+    </AdminContentStyled>
   );
 };
 
-const AdminContentStyled = styled(IonContent)`
+const AdminContentStyled = styled.div`
   --background: var(--ion-color-light);
 `;
 
