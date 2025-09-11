@@ -27,13 +27,6 @@ interface MenuItem {
 
 const menuItems: MenuItem[] = [
   {
-    title: 'Login',
-    url: '/Login',
-    iosIcon: logInOutline,
-    mdIcon: logInOutline,
-    isShown: () => true,
-  },
-  {
     title: 'Services',
     url: '/Services',
     iosIcon: mapOutline,
@@ -52,6 +45,13 @@ const menuItems: MenuItem[] = [
     url: '/Customers',
     iosIcon: archiveOutline,
     mdIcon: archiveSharp,
+    isShown: () => true,
+  },
+  {
+    title: 'Login',
+    url: '/Login',
+    iosIcon: logInOutline,
+    mdIcon: logInOutline,
     isShown: () => true,
   },
   {

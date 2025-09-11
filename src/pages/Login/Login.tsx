@@ -1,20 +1,4 @@
-import {
-  IonButtons,
-  IonContent,
-  IonGrid,
-  IonHeader,
-  IonInput,
-  IonItem,
-  IonLabel,
-  IonList,
-  IonMenuButton,
-  IonPage,
-  IonRow,
-  IonCol,
-  IonTitle,
-  IonToolbar,
-  IonButton,
-} from '@ionic/react';
+import { IonContent, IonGrid, IonInput, IonItem, IonLabel, IonList, IonCol, IonRow, IonButton } from '@ionic/react';
 import './Login.css';
 import { useCallback } from 'react';
 import { CurrentUser } from './CurrentUser';
@@ -39,7 +23,7 @@ const Login: React.FC = () => {
   const authedUser = useSelector(authedUserSelector);
 
   return (
-    <div>
+    <IonContent className="login-content" fullscreen>
       <IonGrid className="login-container">
         <IonRow className="ion-justify-content-center">
           <IonCol size="12" sizeMd="8" sizeLg="6" sizeXl="4">
@@ -72,7 +56,7 @@ const Login: React.FC = () => {
           </IonCol>
         </IonRow>
       </IonGrid>
-    </div>
+    </IonContent>
   );
 };
 

@@ -28,6 +28,14 @@ export type TRouteGuardProps = {
 
 export const routes: TRoute[] = [
   {
+    path: '/',
+    component: Services,
+    layout: BasicLayout,
+    layoutProps: {
+      title: 'Services',
+    },
+  },
+  {
     path: '/Services',
     component: Services,
     layout: BasicLayout,

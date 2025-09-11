@@ -1,4 +1,4 @@
-import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { IonContent } from '@ionic/react';
 import styled from '@emotion/styled';
 import React, { useEffect } from 'react';
 import { UsersList } from './UsersList/UsersList';
@@ -18,7 +18,7 @@ const AdminPage: React.FC = () => {
   const total = useSelector(totalUsersSelector);
 
   return (
-    <AdminContentStyled>
+    <AdminContentStyled fullscreen>
       <UsersListContainerStyled>
         <UsersList users={users} />
       </UsersListContainerStyled>
@@ -27,7 +27,7 @@ const AdminPage: React.FC = () => {
   );
 };
 
-const AdminContentStyled = styled.div`
+const AdminContentStyled = styled(IonContent)`
   --background: var(--ion-color-light);
 `;
 

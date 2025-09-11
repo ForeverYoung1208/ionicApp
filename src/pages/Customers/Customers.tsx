@@ -10,7 +10,6 @@ import { useAppDispatch } from '../../redux/store/store';
 
 const Customers: React.FC = () => {
   const customers = ['Customer1', 'Customer2', 'Customer3', 'Customer4', 'Customer5'];
-  const name = 'Customers';
   const dispatch = useAppDispatch();
   const [selectedCustomers, setSelectedCustomers] = React.useState<string[]>([]);
 
@@ -49,7 +48,7 @@ const Customers: React.FC = () => {
   );
 };
 
-const CustomersContentStyled = styled.div`
+const CustomersContentStyled = styled(IonContent)`
   --background: var(--ion-color-light);
 `;
 

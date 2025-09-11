@@ -1,3 +1,12 @@
+/* Center the login container vertically and horizontally */
+.login-content {
+  --background: var(--ion-color-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
 .login-container {
   width: 100%;
   padding: 16px;

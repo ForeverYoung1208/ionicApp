@@ -42,7 +42,7 @@ const Services: React.FC = () => {
   );
 };
 
-const ServicesContent = styled.div`
+const ServicesContent = styled(IonContent)`
   background-color: var(--ion-color-light);
 `;
 
