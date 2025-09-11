@@ -13,68 +13,83 @@ import {
 import { useLocation } from 'react-router-dom';
 import { archiveOutline, archiveSharp, logInOutline, mapOutline, paperPlaneOutline, paperPlaneSharp, warningOutline, warningSharp } from 'ionicons/icons';
 import './Menu.css';
+import { TAuthedUser } from '../../redux/reducers/auth/types';
+import { useSelector } from 'react-redux';
+import { authedUserSelector } from '../../redux/selectors/authSelectors';
 
-interface AppPage {
+interface MenuItem {
   url: string;
   iosIcon: string;
   mdIcon: string;
   title: string;
+  isShown: (authedUser: TAuthedUser | null) => boolean;
 }
 
-const appPages: AppPage[] = [
-  {
-    title: 'Login',
-    url: '/Login',
-    iosIcon: logInOutline,
-    mdIcon: logInOutline
-  },
+const menuItems: MenuItem[] = [
   {
     title: 'Services',
     url: '/Services',
     iosIcon: mapOutline,
-    mdIcon: mapOutline
+    mdIcon: mapOutline,
+    isShown: () => true,
   },
   {
     title: 'Supplyers',
     url: '/Supplyers',
     iosIcon: paperPlaneOutline,
-    mdIcon: paperPlaneSharp
+    mdIcon: paperPlaneSharp,
+    isShown: () => true,
   },
   {
     title: 'Customers',
     url: '/Customers',
     iosIcon: archiveOutline,
-    mdIcon: archiveSharp
+    mdIcon: archiveSharp,
+    isShown: () => true,
+  },
+  {
+    title: 'Login',
+    url: '/Login',
+    iosIcon: logInOutline,
+    mdIcon: logInOutline,
+    isShown: () => true,
   },
   {
     title: 'Admin',
     url: '/Admin',
     iosIcon: warningOutline,
-    mdIcon: warningSharp
-  }
+    mdIcon: warningSharp,
+    isShown: (authedUser: TAuthedUser | null) => !!authedUser?.id,
+  },
 ];
 
 const Menu: React.FC = () => {
   const location = useLocation();
+  const authedUser = useSelector(authedUserSelector);
 
   return (
     <IonMenu contentId="main" type="overlay">
       <IonContent>
         <IonList id="inbox-list">
-          <IonListHeader>Hello</IonListHeader>
-          <IonNote>Dear guest, login or register to get access to all features</IonNote>
-          {appPages.map((appPage, index) => {
-            return (
+          <IonListHeader>Hello{authedUser?.name ? `, ${authedUser.name}` : ''}</IonListHeader>
+          {!authedUser?.name ? <IonNote>Dear guest, login or register to get access to all features</IonNote> : null}
+          {menuItems.map((appPage, index) => {
+            return appPage.isShown(authedUser) ? (
               <IonMenuToggle key={index} autoHide={false}>
-                <IonItem className={location.pathname === appPage.url ? 'selected' : ''} routerLink={appPage.url} routerDirection="none" lines="none" detail={false}>
+                <IonItem
+                  className={location.pathname === appPage.url ? 'selected' : ''}
+                  routerLink={appPage.url}
+                  routerDirection="none"
+                  lines="none"
+                  detail={false}
+                >
                   <IonIcon aria-hidden="true" slot="start" ios={appPage.iosIcon} md={appPage.mdIcon} />
                   <IonLabel>{appPage.title}</IonLabel>
                 </IonItem>
               </IonMenuToggle>
-            );
+            ) : null;
           })}
         </IonList>
-
       </IonContent>
     </IonMenu>
   );

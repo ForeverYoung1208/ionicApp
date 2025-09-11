@@ -1,30 +1,18 @@
-import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/react';
 import MyMap from '../../components/Map/Map';
 
 const Supplyers: React.FC = () => {
-
   const name = 'Supplyers';
 
   return (
-    <IonPage>
-      <IonHeader>
+    <IonContent fullscreen>
+      <IonHeader collapse="condense">
         <IonToolbar>
-          <IonButtons slot="start">
-            <IonMenuButton />
-          </IonButtons>
-          <IonTitle>{name}</IonTitle>
+          <IonTitle size="large">{name}</IonTitle>
         </IonToolbar>
       </IonHeader>
-
-      <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">{name}</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        <MyMap />
-      </IonContent>
-    </IonPage>
+      <MyMap />
+    </IonContent>
   );
 };
 

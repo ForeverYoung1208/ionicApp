@@ -1,49 +1,42 @@
-import { IonButtons, IonContent, IonHeader, IonItem, IonLabel, IonList, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { IonContent } from '@ionic/react';
 import styled from '@emotion/styled';
-import React, { useEffect, useMemo } from 'react';
-import { UsersService } from '../../api/services/users-service';
-import { UserDto } from '../../api/dto/users/user.dto';
+import React, { useEffect } from 'react';
+import { UsersList } from './UsersList/UsersList';
+import { useAppDispatch } from '../../redux/store/store';
+import { getUsers } from '../../redux/reducers/users/actionCreators/getUsers';
+import { useSelector } from 'react-redux';
+import { allUsersSelector, totalUsersSelector } from '../../redux/selectors/usersSelector';
+import { Typography } from '@mui/material';
 
 const AdminPage: React.FC = () => {
-  const name = 'Admin';
-  
-  const [users, setUsers] = React.useState<UserDto[]>([]);
-  const usersService = useMemo(() => new UsersService(), []); // todo: move to context or redux
-  
+  const dispatch = useAppDispatch();
   useEffect(() => {
-    const fetchUsers = async () => {
-      const {data} = await usersService.getAll();
-      setUsers(data);
-    }
-    fetchUsers();
-  }, [usersService]);
+    dispatch(getUsers());
+  }, [dispatch]);
+
+  const users = useSelector(allUsersSelector);
+  const total = useSelector(totalUsersSelector);
 
   return (
-    <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonButtons slot="start">
-            <IonMenuButton />
-          </IonButtons>
-          <IonTitle>{name}</IonTitle>
-        </IonToolbar>
-      </IonHeader>
-
-      <AdminContentStyled>
-        <IonList>
-          {users.map((user, index) => (
-            <IonItem key={index}>
-              <IonLabel>{user.id} {user.name} {user.email}</IonLabel>
-            </IonItem>
-          ))}
-        </IonList>
-      </AdminContentStyled>
-    </IonPage>
+    <AdminContentStyled fullscreen>
+      <UsersListContainerStyled>
+        <UsersList users={users} />
+      </UsersListContainerStyled>
+      <TotalUsersStyled>Total users: {total}</TotalUsersStyled>
+    </AdminContentStyled>
   );
-}
+};
 
 const AdminContentStyled = styled(IonContent)`
   --background: var(--ion-color-light);
+`;
+
+const UsersListContainerStyled = styled.div`
+  padding: 16px;
+`;
+
+const TotalUsersStyled = styled(Typography)`
+  margin-top: 16px;
 `;
 
 export default AdminPage;
